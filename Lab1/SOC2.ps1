@@ -44,7 +44,8 @@ function antiVirusStat {
     Write-Output "1.Check Antivirus Status"
     Write-Output "2. Quick Scan"
     Write-Output "3.Full scan"
-    Write-Output "4. Main Menu"
+    Write-Output "4. Remove Threats"
+    Write-Output "5. Main Menu"
     $antiVirusopt = Read-Host "Option"
     if ($antiVirusopt -eq 1) {
         Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
@@ -54,6 +55,9 @@ function antiVirusStat {
         antiVirusStat
     }elseif ($antiVirusopt -eq 3) {
         Start-MpScan -ScanType FullScan
+        antiVirusStat
+    }elseif ($antiVirusopt -eq 4) {
+        Remove-MpThreat
         antiVirusStat
     }elseif ($antiVirusopt -eq 4) {
         mainmenu
