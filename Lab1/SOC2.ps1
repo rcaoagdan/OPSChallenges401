@@ -78,7 +78,7 @@ function osUpdates {
     Install-Module PSWindowsUpdate
     Get-WindowsUpdate
     Install-WindowsUpdate
-    
+    mainmenu
 }
 ##############################################################################
 # Main
