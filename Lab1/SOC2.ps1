@@ -72,20 +72,27 @@ function lockScreen {
 # Antivirus installed and scanning 
 ##############################################################################
 function antiVirusStat {
+    Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
+    Write-Output "windows Defender Status:"
+    Get-Service -Name windefend
+    Get-Service -Name mpssvc
+    Write-Output " "
     Write-Output "What Would you like to do?"
-    Write-Output "1.Check Antivirus Status"
-    Write-Output "2. Quick Scan"
-    Write-Output "3.Full scan"
+    Write-Output "1.Quick Scann"
+    Write-Output "2.Full Scan"
+    Write-Output "3.Removing Threats"
     Write-Output "4. Main Menu"
     $antiVirusopt = Read-Host "Option"
     if ($antiVirusopt -eq 1) {
-        Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
-        antiVirusStat
-    }elseif ($antiVirusopt -eq 2) {
         Start-MpScan -ScanType QuickScan
         antiVirusStat
-    }elseif ($antiVirusopt -eq 3) {
+    }elseif ($antiVirusopt -eq 2) {
         Start-MpScan -ScanType FullScan
+        antiVirusStat
+    }elseif ($antiVirusopt -eq 3) {
+        Write-Ouput "Removing Threats"
+        Remove-MpThreat
+        Write-Output "Threats Removed"
         antiVirusStat
     }elseif ($antiVirusopt -eq 4) {
         mainmenu
@@ -99,7 +106,12 @@ function antiVirusStat {
 ##############################################################################
 # Automatic OS updates
 ##############################################################################
-
+function osUpdates {
+    Install-Module PSWindowsUpdate
+    Get-WindowsUpdate
+    Install-WindowsUpdate
+    mainmenu
+}
 ##############################################################################
 # Main
 ##############################################################################
