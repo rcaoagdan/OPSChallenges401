@@ -28,7 +28,7 @@ function mainmenu {
     }elseif ($mainOpt -eq 5) {
         osUpdates
     }else {
-        Write-Output "Incorrect Input, Please Select Another `n"
+        Write-Output "Incorrect Option, Please Choose a Correct option. `n"
         mainmenu
     }
 }
@@ -40,8 +40,28 @@ function mainmenu {
 # Antivirus installed and scanning 
 ##############################################################################
 function antiVirusStat {
-    Write-Output "Checking to see current AntiVirus Software:"
-    Get-CimInstance -NameSpace root/SecuirtyCenter2 -ClassName AntivirusProduct
+    Write-Output "What Would you like to do?"
+    Write-Output "1.Check Antivirus Status"
+    Write-Output "2. Quick Scan"
+    Write-Output "3.Full scan"
+    Write-Output "4. Main Menu"
+    $antiVirusopt = Read-Host "Option"
+    if ($antiVirusopt -eq 1) {
+        Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
+        antiVirusStat
+    }elseif ($antiVirusopt -eq 2) {
+        Start-MpScan -ScanType QuickScan
+        antiVirusStat
+    }elseif ($antiVirusopt -eq 3) {
+        Start-MpScan -ScanType FullScan
+        antiVirusStat
+    }elseif ($antiVirusopt -eq 4) {
+        mainmenu
+    }else {
+        Write-Output "Incorrect Option, Please Choose a Correct option. `n"
+        antiVirusStat
+    }
+    
     
 }
 ##############################################################################
