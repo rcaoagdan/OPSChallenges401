@@ -10,7 +10,7 @@
 ##############################################################################
 function mainmenu {
     Write-Output "Select Option Below `n"
-    Write-Output "1. Lock Computer"
+    Write-Output "1. Lock Screen"
     Write-Output "2. Restart Computer"
     Write-Output "3. Shut Down Computer"
     Write-Output "4. Antivirus"
@@ -18,7 +18,7 @@ function mainmenu {
     $mainOpt = Read-Host "Option"
     
     if($mainOpt -eq 1){
-        rundll32.exe user32.dll,LockWorStation
+        lockScreen
     }elseif ($mainOpt -eq 2) {
         Restart-Computer
     }elseif ($mainOpt -eq 3) {
@@ -35,6 +35,38 @@ function mainmenu {
 
 
 
+
+##############################################################################
+# Automatic Lock Screen
+##############################################################################
+function lockScreen {
+    Write-Output "What would you like to do"
+    Write-Output "1. Set Lock Screen"
+    Write-Output "2. Lock Computer"
+    Write-Output "3. Main Menu"
+    $lockOpt = Read-Host "Option"
+    if ($lockOpt -eq 1) {
+        lockScreenConfig
+    }elseif ($lockOpt -eq 2) {
+        rundll32.exe user32.dll,LockWorStation
+    }elseif ($lockOpt -eq 3) {
+       mainmenu
+    }else {
+        Write-Output "Incorrect Option, Please Choose a Correct option. `n"
+        lockScreen
+    }
+}
+    function lockScreenConfig {
+        Write-Output "Lock Screen Configuration"
+        $lockscreentimout = Read-Host "In seconds, enter time you wish for the computer to auto lock: "
+        if ($lockscreentimout -is [int]){
+            Write-Output "True"
+        }else {
+            Write-Output "Please enter a numberic value"
+            lockScreenConfig
+        }
+        
+    }
 
 ##############################################################################
 # Antivirus installed and scanning 
