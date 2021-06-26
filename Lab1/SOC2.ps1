@@ -59,12 +59,8 @@ function lockScreen {
     function lockScreenConfig {
         Write-Output "Lock Screen Configuration"
         $lockscreentimout = Read-Host "In seconds, enter time you wish for the computer to auto lock: "
-        if ($lockscreentimout -is [int]){
-            Write-Output "True"
-        }else {
-            Write-Output "Please enter a numberic value"
-            lockScreenConfig
-        }
+        powercfg.exe /SETACVALUEINDEX SCHEME_CURRENT SUB_VIDEO VIDEOIDLE $lockscreentimout
+        powercfg.exe /SETACTIVE SCHEME_CURRENT
         
     }
 
