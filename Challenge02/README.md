@@ -12,7 +12,7 @@ Assign success or failure to a status variable.
 For every ICMP transmission attempted, print the status variable along with a comprehensive timestamp and destination IP tested.
 Example output: 2020-10-05 17:57:57.510261 Network Active to 8.8.8.8
 
-###Stretch Goals (Optional Objectives)
+### Stretch Goals (Optional Objectives)
 In Python, add the below features to your uptime sensor tool.
 
 The script must:
