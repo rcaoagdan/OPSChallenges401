@@ -48,7 +48,7 @@ function lockScreen {
     if ($lockOpt -eq 1) {
         lockScreenConfig
     }elseif ($lockOpt -eq 2) {
-        rundll32.exe user32.dll,LockWorStation
+        rundll32.exe user32.dll,LockWorkStation
     }elseif ($lockOpt -eq 3) {
        mainmenu
     }else {
