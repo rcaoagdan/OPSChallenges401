@@ -10,7 +10,7 @@
 ##############################################################################
 import os
 import datetime
-import subprocess
+
 
 ##############################################################################
 # Set Variable for a user input ip address
@@ -18,17 +18,21 @@ import subprocess
 ip_input=input("Please enter in an IP Address:")
 ping_request=os.system("ping -w 2000 " + ip_input)
 current_date_time=datetime.datetime.now()
-print (" ")
+dataFile=open("data.txt", "w")
 
 ##############################################################################
-# For loop  to print network status for every ICMP transmission sent
+# Ping Status Function, prints to results to file
 ##############################################################################
-for ping in range (1,5):
-   if ping_request == 0: 
-      print(current_date_time,"Network Active to",ip_input) 
-   else:
-      print(current_date_time,"Network NOT Active to",ip_input)
+def pingStatus():
+   for ping in range (1,5):
+      if ping_request == 0: 
+         print(current_date_time,"Network Active to",ip_input, file=dataFile) 
+      else:
+         print(current_date_time,"Network NOT Active to",ip_input,file=dataFile)
+   dataFile.close()
 
-
-
-
+##############################################################################
+# main
+##############################################################################
+print(" ")
+pingStatus()
