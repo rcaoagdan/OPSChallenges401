@@ -14,6 +14,7 @@ The script must:
     Example output: 2020-10-05 17:57:57.510261 Network Active to 8.8.8.8 
 
 ***Stretch Goals (Optional Objectives)***
+
 In Python, add the below features to your uptime sensor tool.
 
 The script must: 
@@ -25,7 +26,7 @@ The script must:
 ## Part 2
 Today you will finish writing an uptime sensor tool that checks systems are responding by adding a feature that notifies you of interesting status changes.
 
-Requirements
+### Requirements
 In Python, add the below features to your uptime sensor tool.
 
 The script must:
@@ -35,7 +36,8 @@ The script must:
 * Send an email to the administrator if a host status changes from “down” to “up”.
 * The email message should clearly indicate which host status changed, the status before and after, and a timestamp of the event.
 
-### Stretch Goals (Optional Objectives)
+***Stretch Goals (Optional Objectives)***
+
 In Python, add the below features to your uptime sensor tool.
 
 The script must:
