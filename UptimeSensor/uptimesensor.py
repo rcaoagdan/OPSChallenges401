@@ -19,8 +19,9 @@ ip_input=input("Please enter in an IP Address:")
 ping_request=os.system("ping -w 2000 " + ip_input)
 current_date_time=datetime.datetime.now()
 print (" ")
+
 ##############################################################################
-# Ping Function
+# For loop  to print network status for every ICMP transmission sent
 ##############################################################################
 for ping in range (1,5):
    if ping_request == 0: 
