@@ -24,7 +24,7 @@ dataFile=open("data.txt", "w")
 # Ping Status Function, prints to results to file
 ##############################################################################
 def pingStatus():
-   for ping in range (1,5):
+   for ping in range (0,4):
       if ping_request == 0: 
          print(current_date_time,"Network Active to",ip_input, file=dataFile) 
       else:
