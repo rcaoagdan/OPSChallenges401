@@ -12,7 +12,7 @@
 ##############################################################################
 import os
 import datetime
-import getpass
+import getpass #password
 import email
 import smtplib # email sending 
 from email.message import EmailMessage #email module
