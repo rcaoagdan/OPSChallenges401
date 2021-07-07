@@ -2,7 +2,7 @@
 
 # Script: Ops Challenge Uptime Sensor
 # Author: Ray Caoagdan
-# Date of Last Revision: 06/30/2021
+# Date of Last Revision: 07/06/2021
 # Purpose: Uptime Sensor 
 # Part 1: Ping Status and Print to File
 # Part 2: Email Ping Status
