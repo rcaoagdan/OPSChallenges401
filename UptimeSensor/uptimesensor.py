@@ -36,37 +36,60 @@ def PingStatus():
    for ping in range (0,4):
       if ping_request == 0: 
          print(current_date_time,"Network Active to",ip_input, file=dataFile)
-        
+         
       else:
          print(current_date_time,"Network NOT Active to",ip_input,file=dataFile)
-     
+         
+   dataFile.close()     
 
 ##############################################################################
 # Email Ping Status
 ##############################################################################
-def mailPingStatus(): 
+def emailPing():
+   if ping_request == 0:
+      mailPingStatusUP()
+   else:
+      mailPingStatusDown()
+
+def mailPingStatusUP(): 
    adminEmail=input('Enter Administrators Email:')
    userEmail=input('Enter your Email:')
    userPass=getpass.getpass("Password:")
    mail=smtplib.SMTP_SSL("smtp.gmail.com", 465)
-   files=open("data.txt", "r")
+   dt=current_date_time.strftime("%m/%d/%Y %H:%M:%S")
    emailMSG=MIMEMultipart()
    emailMSG['From']=userEmail
    emailMSG['To']=adminEmail
-   emailMSG['Subject']='Ping Status'
-   #email_body="Hello, attached are the results of the Ping Status"
-   emailMSG.attach(MIMEText(files.read(), "plain"))
-   files.close()
+   emailMSG['Subject']='Ping Status for ' + dt
+   email_body=("Network is up")
+   emailMSG.attach(MIMEText(email_body, "plain"))
    mail.ehlo()
    mail.login(userEmail, userPass)
    mail.sendmail(userEmail, adminEmail, emailMSG.as_string())
    mail.quit()
+
+def mailPingStatusDown(): 
+   adminEmail2=input('Enter Administrators Email:')
+   userEmail2=input('Enter your Email:')
+   userPass2=getpass.getpass("Password:")
+   mail2=smtplib.SMTP_SSL("smtp.gmail.com", 465)
+   dt2=current_date_time.strftime("%m/%d/%Y %H:%M:%S")
+   emailMSG2=MIMEMultipart()
+   emailMSG2['From']=userEmail2
+   emailMSG2['To']=adminEmail2
+   emailMSG2['Subject']='Ping Status for ' + dt2
+   email_body2=("Network is down")
+   emailMSG2.attach(MIMEText(email_body2, "plain"))
+   mail2.ehlo()
+   mail2.login(userEmail2, userPass2)
+   mail2.sendmail(userEmail2, adminEmail2, emailMSG2.as_string())
+   mail2.quit()
 ##############################################################################
 # main
 ##############################################################################
 print(" ")
 PingStatus()
-mailPingStatus()
+emailPing()
 ##############################################################################
 # End
 ##############################################################################
