@@ -1,0 +1,1 @@
+Powershell srcripts taht automates configuration for CIS Benchmarks
