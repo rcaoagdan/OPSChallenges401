@@ -5,20 +5,18 @@
 # Purpose: Automate CIS Benchmark Configurations
 ##############################################################################
 
+##############################################################################
+# Main Menu Function
+##############################################################################
 function mainmenu {
-    Write-Output "Select from option below"
-    Write-Output "1.Password Settings"
-    Write-Output "2.Account Lockout"
-    Write-Output "3.SMBv1 Settings"
-    $userinput = Read-Host "Option"
+    Write-Output " "
+    Write-Output "Main Menu"
+    $userinput = Read-Host "1. Password Settings | 2. SMBv1 Settings"
    
     if($userinput -eq 1){
         Write-Output " "
         passWRD
     }elseif($userinput -eq 2){
-        Write-Output " "
-        acctLK
-    }elseif($userinput -eq 3){
         Write-Output " "
         smbSettings
     }else{
@@ -27,9 +25,13 @@ function mainmenu {
     }
 }
 
+##############################################################################
+# Password Functions
+ # Check password settings, handle complexity, length, lockout period
+##############################################################################
 function passWRD {
 Write-Output "What would you like to do?"
-Write-Output "1.Check Current Password Settings"
+Write-Output "1. Check Current Password Settings"
 Write-Output "2. Enable/Disable Complexity"
 Write-Output "3. Set Password Length"
 Write-Output "4. Set Lockout Duration"
@@ -44,8 +46,7 @@ if($pswrd -eq 1){
 }elseif($pswrd -eq 3){
     setPasslength
 }elseif ($pswrd -eq 4) {
-    Write-Output "WIP "
-    passWRD
+    acctLK
 }elseif ($pswrd -eq 5) {
     mainmenu
 }else {
@@ -66,21 +67,28 @@ $pswrd2 = Read-Host "Option"
         Write-Output"Please Select Correct Option"
         passComplex
     }
-
-
 }
 
 function setPasslength {
-$passlength = Read-Host "Minimum Characters for Password Length"
-net accounts /minpwlen:$passlength
-passWRD
+    $passlength = Read-Host "Minimum Characters for Password Length"
+    net accounts /minpwlen:$passlength
+    passWRD
 }
 
-
+##############################################################################
+# Main Menu Function
+##############################################################################
 function acctLK {
-Write-Output "WIP"
+        $lockDuration = Read-Host "Enter Lockout Duration in minutes format ie 00:xx:00"
+        $lockObservation = Read-Host "Lockout Observation Window minutes format ie 00:xx:00"
+        $lockTresh = Read-Host "Enter number attempts before lockout"
+        Set-ADDefaultDomainPasswordPolicy -Identity corp.Initrobe.com -LockoutDuration $lockDuration -LockoutObservationWindow $lockObservation -LockoutThreshold $lockTresh
+        passWRD
 }
 
+##############################################################################
+# smbv1 Settings
+##############################################################################
 function smbSettings {
 Write-Output "What would you like to do?"
 Write-Output "1.Check SMB Settings"
@@ -92,10 +100,10 @@ if ($smbSet -eq 1) {
     Get-WindowsOptionalFeature -Online -FeatureName smb1protocol
     smbSettings
 }elseif ($smbSet -eq 2) {
-    Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+    Enable-WindowsOptionalFeature -Online -FeatureName smb1protocol
     smbSettings
 }elseif ($smbSet -eq 3) {
-    Enable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+    Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
     smbSettings
 }elseif ($smbSet -eq 4) {
     mainmenu
@@ -105,5 +113,12 @@ if ($smbSet -eq 1) {
 }
 }
 
-
+##############################################################################
+# Main
+##############################################################################
+Write-Output "Welcome, to CIS Hardening toolkit."
+Write-Output "Please Lookover the menu below"
 mainmenu
+##############################################################################
+# end
+##############################################################################
