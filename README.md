@@ -7,3 +7,5 @@ Table of contents for Ops Challenges for Ops 401 Cybersecurity Engineering
 [Ops Challenge: Uptime Sensor](https://github.com/rcaoagdan/OPSChallenges401/tree/main/UptimeSensor)
 
 [Ops Challenge: Python Encryptor](https://github.com/rcaoagdan/OPSChallenges401/tree/main/PythonEncryptor) 
+
+[Lab 4: CIS Hardening](https://github.com/rcaoagdan/OPSChallenges401/tree/main/Lab4)
