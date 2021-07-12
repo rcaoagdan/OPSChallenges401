@@ -9,24 +9,15 @@
 ##############################################################################
 # Import Library 
 ##############################################################################
-
+import cryptography
 from cryptography.fernet import Fernet 
-
-##############################################################################
-# Key Generation - Saves to a file
-# Genrates key to be used to encrpy/decrpyt files
-##############################################################################
-
-key = Fernet.generate_key()
-with open('filekey.key','wb') as filekey:
-    filekey.write(key)
 
 ##############################################################################
 # Main Menu Fuction
 ##############################################################################
 def main_menu():
     print (" ")
-    print ("What would you like to do? /n")
+    print ("What would you like to do? ")
     print("1.Encrypt a file")
     print("2.Decrypt a file")
     print("3.Enrypt a message")
@@ -38,11 +29,9 @@ def main_menu():
         print("Decrpyting file")
         main_menu()
     elif mainResponse == '3':
-        print("Encrypting Message")
-        main_menu()
+        msgEncryption()
     elif mainResponse == '4':
-        print("Decrypting Message")
-        main_menu()
+        msgDecryption()
     else:
         print("Incorrect selection main")
         main_menu()
@@ -50,42 +39,69 @@ def main_menu():
 ##############################################################################
 # Key Generation 
 ##############################################################################
-#def writeKey():
-key = Fernet.generate_key()
-with open('filekey.key','wb') as filekey:
-    filekey.write(key)
+def writeKey():
+    key = Fernet.generate_key()
+    with open('filekey.key','wb') as filekey:
+        filekey.write(key)
 
 ##############################################################################
 # loads key
 ##############################################################################
 def loadKey():
-   return open('filkey.key', 'rb').read()
+   return open('filekey.key', 'rb').read()
 
 ##############################################################################
 # File Encryption 
 ##############################################################################
 def fileEncryption():
-    print("FILE ENCRPYTION \n")
-    filePath = input("File to Encrpyt:")
-    loadKey()
-    f = Fernet(filekey)
-    with open(filePath, "rb") as masterFile:
-        masterFile_data=masterFile.read()
-    encryptedFile = f.encrypt(masterFile_data)
-    with open(filePath,"wb") as masterFile:
-        masterFile.write(encryptedFile)
-    #main_menu()
+    #print("FILE ENCRPYTION \n")
+    #filePath = input("File to Encrpyt:")
+    #loadKey()
+    #f = Fernet(filekey)
+   # with open(filePath, "rb") as masterFile:
+       # masterFile_data=masterFile.read()
+    #encryptedFile = f.encrypt(masterFile_data)
+    #with open(filePath,"wb") as masterFile:
+       # masterFile.write(encryptedFile)
+    main_menu()
+
 ##############################################################################
 # File Decryption
 ##############################################################################
+def fileDecryption():
+    print("WIP")
+    main_menu()
 
 ##############################################################################
 # Message Encryption
 ##############################################################################
-
+def msgEncryption():
+    print(" ")
+    print("Message Encryption")
+    writeKey()
+    key=loadKey()
+    user_msg = input("MESSAGE TO ENCRYPT:")
+    f=Fernet(key)
+    msg=f.encrypt(user_msg.encode())
+    print(" ")
+    print("Encrpyted Message:")
+    print(msg)
+    main_menu()
 ##############################################################################
 # Message Decryption
 ##############################################################################
+def msgDecryption():
+    print(" ")
+    print("Message Decryption:")
+    writeKey()
+    key=loadKey()
+    f=Fernet(key)
+    udmsg = input("MESSAGE TO DECRYPT:")
+    dMsg=f.decrypt(udmsg)
+    print(" ")
+    print("Decrypted Message:")
+    print(dMsg.decode())
+    main_menu()
 
 ##############################################################################
 # Main
