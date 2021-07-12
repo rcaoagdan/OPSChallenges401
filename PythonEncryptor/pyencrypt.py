@@ -51,6 +51,12 @@ def loadKey():
    return open('filekey.key', 'rb').read()
 
 ##############################################################################
+# keys to be used in fuctions
+##############################################################################
+key=loadKey()
+f=Fernet(key)
+
+##############################################################################
 # File Encryption 
 ##############################################################################
 def fileEncryption():
@@ -78,10 +84,7 @@ def fileDecryption():
 def msgEncryption():
     print(" ")
     print("Message Encryption")
-    writeKey()
-    key=loadKey()
     user_msg = input("MESSAGE TO ENCRYPT:")
-    f=Fernet(key)
     msg=f.encrypt(user_msg.encode())
     print(" ")
     print("Encrpyted Message:")
@@ -93,20 +96,19 @@ def msgEncryption():
 def msgDecryption():
     print(" ")
     print("Message Decryption:")
-    writeKey()
-    key=loadKey()
-    f=Fernet(key)
     udmsg = input("MESSAGE TO DECRYPT:")
     dMsg=f.decrypt(udmsg)
     print(" ")
     print("Decrypted Message:")
-    print(dMsg.decode())
+    print(dMsg)
     main_menu()
 
 ##############################################################################
 # Main
 ##############################################################################
 main_menu()
+writeKey()
+
 ##############################################################################
 # End
 ##############################################################################
