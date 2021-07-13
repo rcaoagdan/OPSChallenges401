@@ -9,9 +9,8 @@
 ##############################################################################
 # Import Library 
 ##############################################################################
-import base64
-import builtins
-from os import path
+import base64 
+import os
 from cryptography.fernet import Fernet 
 
 ##############################################################################
@@ -20,19 +19,28 @@ from cryptography.fernet import Fernet
 def main_menu():
     print (" ")
     print ("What would you like to do? ")
-    print("1.Encrypt a file")
-    print("2.Decrypt a file")
-    print("3.Enrypt a message")
-    print("4.Decrypt a messsage")
+    print("1.Encrypt a File")
+    print("2.Decrypt a File")
+    print("3.Encrypt a Folder")
+    print("4.Decrypt a Folder")
+    print("5.Enrypt a message")
+    print("6.Decrypt a messsage")
+    print("7.Exit")
     mainResponse = input("Desired Request:")
     if mainResponse == '1':
         fileEncryption()
     elif mainResponse == '2':
         fileDecryption()
-    elif mainResponse == '3':
-        msgEncryption()
+    elif mainResponse== '3':
+        folderEncrypt()
     elif mainResponse == '4':
+        folderDecrypt()
+    elif mainResponse == '5':
+        msgEncryption()
+    elif mainResponse == '6':
         msgDecryption()
+    elif mainResponse == '7':
+        exit
     else:
         print("Incorrect selection main")
         main_menu()
@@ -80,10 +88,42 @@ def fileDecryption():
     with open(filePath, 'rb') as enc_File:
         originalFile = enc_File.read()
     dFile = fK.decrypt(originalFile)
-    
     with open(filePath,'wb') as dec_File:
         dec_File.write(dFile)
     dec_File.close()
+    main_menu()
+
+##############################################################################
+# Folder Encryption
+##############################################################################
+def folderEncrypt():
+    print("Folder Encryption \n")
+    folderInput = input("Folder to Encrypt:")
+    for filename in os.listdir(folderInput):
+        files = os.path.join(folderInput,filename)
+        with open(files,'rb') as f:
+            enc_data=f.read()
+        eData = fK.encrypt(enc_data)
+        with open(files,'wb') as eF:
+            eF.write(eData)
+        eF.close()
+    main_menu()
+
+
+##############################################################################
+# Folder Decryption
+##############################################################################
+def folderDecrypt():
+    print("Folder Decryption \n")
+    folderInput = input("Folder to Encrypt:")
+    for filename in os.listdir(folderInput):
+        files = os.path.join(folderInput,filename)
+        with open(files,'rb') as f:
+            original_data=f.read()
+        dec_Folder = fK.encrypt(original_data)
+        with open(files,'wb') as dF:
+            dF.write(dec_Folder)
+        dF.close()
     main_menu()
 
 ##############################################################################
