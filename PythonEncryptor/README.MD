@@ -3,6 +3,7 @@ Encryption of data at rest is a common need in security operations. Today you wi
 
 ### Requierments
 
+***Part 1***
 In Python, create a script that utilizes the cryptography library to:
 
 * Prompts user to select a mode:
