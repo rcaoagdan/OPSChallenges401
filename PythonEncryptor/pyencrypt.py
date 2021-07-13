@@ -9,7 +9,9 @@
 ##############################################################################
 # Import Library 
 ##############################################################################
-import cryptography
+import base64
+import builtins
+from os import path
 from cryptography.fernet import Fernet 
 
 ##############################################################################
@@ -41,8 +43,8 @@ def main_menu():
 ##############################################################################
 def writeKey():
     key = Fernet.generate_key()
-    with open('filekey.key','wb') as filekey:
-        filekey.write(key)
+    with open('filekey.key','wb') as key_file:
+        key_file.write(key)
 
 ##############################################################################
 # loads key
@@ -53,9 +55,9 @@ def loadKey():
 ##############################################################################
 # keys to be used in fuctions
 ##############################################################################
+writeKey()
 key=loadKey()
-f=Fernet(key)
-
+fK=Fernet(key)
 ##############################################################################
 # File Encryption 
 ##############################################################################
@@ -85,11 +87,12 @@ def msgEncryption():
     print(" ")
     print("Message Encryption")
     user_msg = input("MESSAGE TO ENCRYPT:")
-    msg=f.encrypt(user_msg.encode())
+    msg_bytes = user_msg.encode('ascii')
+    encodedMSG=base64.b64encode(msg_bytes)
     print(" ")
-    print("Encrpyted Message:")
-    print(msg)
-    main_menu()
+    print("Encoded Message:")
+    print(encodedMSG)
+
 ##############################################################################
 # Message Decryption
 ##############################################################################
@@ -97,17 +100,19 @@ def msgDecryption():
     print(" ")
     print("Message Decryption:")
     udmsg = input("MESSAGE TO DECRYPT:")
-    dMsg=f.decrypt(udmsg)
+    b64_bytes = udmsg.encode('ascii')
+    msg_bytes = base64.b64decode(b64_bytes)
+    oMsg=msg_bytes.decode('ascii')
     print(" ")
+    print(oMsg)
     print("Decrypted Message:")
-    print(dMsg)
+   
     main_menu()
 
 ##############################################################################
 # Main
 ##############################################################################
 main_menu()
-writeKey()
 
 ##############################################################################
 # End
