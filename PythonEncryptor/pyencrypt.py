@@ -28,8 +28,7 @@ def main_menu():
     if mainResponse == '1':
         fileEncryption()
     elif mainResponse == '2':
-        print("Decrpyting file")
-        main_menu()
+        fileDecryption()
     elif mainResponse == '3':
         msgEncryption()
     elif mainResponse == '4':
@@ -62,22 +61,29 @@ fK=Fernet(key)
 # File Encryption 
 ##############################################################################
 def fileEncryption():
-    #print("FILE ENCRPYTION \n")
-    #filePath = input("File to Encrpyt:")
-    #loadKey()
-    #f = Fernet(filekey)
-   # with open(filePath, "rb") as masterFile:
-       # masterFile_data=masterFile.read()
-    #encryptedFile = f.encrypt(masterFile_data)
-    #with open(filePath,"wb") as masterFile:
-       # masterFile.write(encryptedFile)
+    print("FILE ENCRPYTION \n")
+    filePath = input("File to Encrpyt:")
+    with open(filePath, 'rb') as file:
+        originalFile = file.read()
+    eFile = fK.encrypt(originalFile)
+    with open(filePath,'wb') as encryptedFile:
+        encryptedFile.write(eFile)
+    encryptedFile.close()
     main_menu()
 
 ##############################################################################
 # File Decryption
 ##############################################################################
 def fileDecryption():
-    print("WIP")
+    print("FILE DECRYPTION \n")
+    filePath = input("File to Decrypt:")
+    with open(filePath, 'rb') as enc_File:
+        originalFile = enc_File.read()
+    dFile = fK.decrypt(originalFile)
+    
+    with open(filePath,'wb') as dec_File:
+        dec_File.write(dFile)
+    dec_File.close()
     main_menu()
 
 ##############################################################################
@@ -85,7 +91,7 @@ def fileDecryption():
 ##############################################################################
 def msgEncryption():
     print(" ")
-    print("Message Encryption")
+    print("Message Encryption \n")
     user_msg = input("MESSAGE TO ENCRYPT:")
     msg_bytes = user_msg.encode('ascii')
     encodedMSG=base64.b64encode(msg_bytes)
@@ -98,7 +104,7 @@ def msgEncryption():
 ##############################################################################
 def msgDecryption():
     print(" ")
-    print("Message Decryption:")
+    print("Message Decryption \n")
     udmsg = input("MESSAGE TO DECRYPT:")
     b64_bytes = udmsg.encode('ascii')
     msg_bytes = base64.b64decode(b64_bytes)
@@ -106,9 +112,7 @@ def msgDecryption():
     print(" ")
     print(oMsg)
     print("Decrypted Message:")
-   
     main_menu()
-
 ##############################################################################
 # Main
 ##############################################################################
@@ -116,4 +120,15 @@ main_menu()
 
 ##############################################################################
 # End
+##############################################################################
+
+
+##############################################################################
+# Sources
+##############################################################################
+## https://stackabuse.com/encoding-and-decoding-base64-strings-in-python
+## https://www.thepythoncode.com/article/encrypt-decrypt-files-symmetric-python
+## https://pypi.org/project/cryptography/
+##############################################################################
+# End Sources 
 ##############################################################################
