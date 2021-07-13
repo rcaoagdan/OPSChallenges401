@@ -30,6 +30,14 @@ Depending on the selection, perform one of the below functions. You’ll need to
 * Decrypt the string if in mode 4.
     * Print the cleartext to the screen.   
 
+***Part 2:***
+
+* Recursively encrypt a single folder and all its contents.
+* Recursively decrypt a single folder that was encrypted by this tool.
+
+***Part 3:***
+* Alter the desktop wallpaper on a Windows PC with a ransomware message
+* Create a popup window on a Windows PC with a ransomware message
 
 ### Stretch Goals
 * Prompt the user if the output file should be compressed to an archive.
