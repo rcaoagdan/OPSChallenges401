@@ -2,7 +2,7 @@
 
 # Script: Ops Challenge 06 File Encryption
 # Author: Ray Caoagdan
-# Date of Last Revision: 07/112021
+# Date of Last Revision: 07/11/2021
 # Purpose: Encryption with Python
 
 
@@ -42,7 +42,7 @@ def main_menu():
     elif mainResponse == '7':
         exit
     else:
-        print("Incorrect selection main")
+        print("Incorrect selection made")
         main_menu()
 
 ##############################################################################
@@ -120,7 +120,7 @@ def folderDecrypt():
         files = os.path.join(folderInput,filename)
         with open(files,'rb') as f:
             original_data=f.read()
-        dec_Folder = fK.encrypt(original_data)
+        dec_Folder = fK.decrypt(original_data)
         with open(files,'wb') as dF:
             dF.write(dec_Folder)
         dF.close()
@@ -138,6 +138,7 @@ def msgEncryption():
     print(" ")
     print("Encoded Message:")
     print(encodedMSG)
+    main_menu()
 
 ##############################################################################
 # Message Decryption
@@ -157,7 +158,6 @@ def msgDecryption():
 # Main
 ##############################################################################
 main_menu()
-
 ##############################################################################
 # End
 ##############################################################################
