@@ -14,6 +14,7 @@ import random
 import sys
 from scapy.all import ICMP,IP,sr1,TCP
 from scapy.volatile import RandShort
+from datetime import datetime
 
 ##############################################################################
 # Global Variables
@@ -47,6 +48,10 @@ RSTACK = 0X14
 # TCP Port open Closed
 ##############################################################################
 def tcpScan():
+    print("*" * 50)
+    print("Scanning:" + dIP )
+    print("Scanning started at:" + str(datetime.now()))
+    print("*" * 50)
     for dstPort in rPort:
         resp=sr1(IP(dst=dIP)/TCP(sport=srcPort,dport=dstPort,flags="S"),timeout=1,verbose=0)
     
