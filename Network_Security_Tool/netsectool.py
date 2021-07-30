@@ -2,7 +2,7 @@
 
 # Script: Network Security Tool
 # Author: Ray Caoagdan
-# Date of Last Revision: 07/28/2021
+# Date of Last Revision: 07/29/2021
 # Purpose:  Scan Ports
 
 ##############################################################################
@@ -43,7 +43,7 @@ def tcpScan():
     dIP = input("Enter a Destination IP Address:")
     nPorts = int(input("Enter number of ports you wish to scan: "))
     rPort=list(map(int,input("\nEnter Ports: ").strip().split()))[:nPorts] 
-    srcPort = random.randint(1,5000) 
+    srcPort = random.randint(1000,50000) 
     SYNACK = 0X12 # Var for SYNACK flag
     RSTACK = 0X14 # Var fpr RSTACK flag
 
