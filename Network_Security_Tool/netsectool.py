@@ -2,8 +2,8 @@
 
 # Script: Network Security Tool
 # Author: Ray Caoagdan
-# Date of Last Revision: 07/29/2021
-# Purpose:  Scan Ports
+# Date of Last Revision: 08/02/2021
+# Purpose:  Scan Ports | ICMP Sweep
 
 ##############################################################################
 # Import Library 
