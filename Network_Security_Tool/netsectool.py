@@ -16,6 +16,7 @@ from ipaddress import IPv4Network
 from scapy.all import *
 from datetime import datetime
 
+
 ##############################################################################
 # Main Menu
 ##############################################################################
@@ -143,6 +144,37 @@ main_menu()
 ##############################################################################
 # Source/ Refrence
 ##############################################################################
+
+#### Sources/ Codes used as reference/copied #### 
+
+##TCP##
 # https://gist.github.com/mic159/c7133509af81dad409b79b8c4838f4bd
 
+##ICPMP Ping Sweep##
 # https://thepacketgeek.com/scapy/building-network-tools/part-10/
+
+
+#### For your Reference ####
+
+### TCP SCAN ###
+
+# NULL = 0x00
+# END = 0x01
+# SYN = 0x02
+# RST = 0x04
+# PSH = 0x08
+# ACK = 0x10
+# SYN + ACK = 0x12
+# RST + ACK = 0x14
+# PSH + ACK = 0x18
+### IPCMP ###
+
+## Tpye 3 ## - Destuination Unreachable
+
+##CODE##
+# 1 - Host Unreachable
+# 2 - Protocol Unreachable
+# 3 - Port Unreachable
+# 9 - Communication with Destination Network is Administratvely Prohibited 
+# 10 - Communication with Destination Host is Administratively Prohibited
+# 13 - Communication with Administrativley Prohibited 
