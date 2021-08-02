@@ -9,6 +9,7 @@
 # Import Library 
 ##############################################################################
 import random
+from re import VERBOSE
 import sys
 from typing import List
 from ipaddress import IPv4Network
@@ -41,6 +42,12 @@ def main_menu():
 # TCP Port Scanner
 ##############################################################################
 def tcpScan():
+    print(" ")
+    print("*" * 50) 
+    print("TCP Scan")
+    print("*" * 50) 
+    print(" ")
+
     dIP = input("Enter a Destination IP Address:")
     nPorts = int(input("Enter number of ports you wish to scan: "))
     rPort=list(map(int,input("\nEnter Ports: ").strip().split()))[:nPorts] 
@@ -90,16 +97,40 @@ def ICMPSweep():
     print(" ")
     
     
-    network=input("Input IP range to ping in format 0.0.0.0/0:")
+    network=input("Input IP range to ping in format 0.0.0.0/0: ")
     addresses=IPv4Network(network)
+    liveCount=0
 
     print("*" * 50) 
-    print("Scanning:" + dIP )
-    print("Scanning started at: " + str(datetime.now()))
+    print("Pinging:" + network )
+    print("Ping Sweep started at: " + str(datetime.now()))
     print("*" * 50)
     print (" ")
 
+    for host in addresses:
+        if (host in (addresses.network_address, addresses.broadcast_address)):
+            continue
+        resp= sr1(IP(dst=str(host))/ICMP(),timeout=2,verbose=0)
 
+        if resp is None:
+            print (str(host) + " is down/unresponsive.")
+        elif(
+            int(resp.getlayer(ICMP).type) == 3 and 
+            int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
+         ):
+            print(str(host)  + " is blocking ICMP traffic")
+        else:
+            print(str(host)  + " is respoinding.")
+            liveCount += 1
+        
+    print(liveCount/addresses.num_addresses + " hosts are online")
+
+    print (" ")
+    print("*" * 50) 
+    print("Pinged:" + network )
+    print("Ping Sweep ended at: " + str(datetime.now()))
+    print("*" * 50)
+    print (" ")
     main_menu()
 ##############################################################################
 # Main
