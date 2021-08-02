@@ -11,6 +11,7 @@
 import random
 import sys
 from typing import List
+from ipaddress import IPv4Network
 from scapy.all import *
 from datetime import datetime
 
@@ -82,7 +83,23 @@ def tcpScan():
 # ICMP Sweep
 ##############################################################################
 def ICMPSweep():
-    print("WIP")
+    print(" ")
+    print("*" * 50) 
+    print("ICMP PINGSWEEP")
+    print("*" * 50) 
+    print(" ")
+    
+    
+    network=input("Input IP range to ping in format 0.0.0.0/0:")
+    addresses=IPv4Network(network)
+
+    print("*" * 50) 
+    print("Scanning:" + dIP )
+    print("Scanning started at: " + str(datetime.now()))
+    print("*" * 50)
+    print (" ")
+
+
     main_menu()
 ##############################################################################
 # Main
