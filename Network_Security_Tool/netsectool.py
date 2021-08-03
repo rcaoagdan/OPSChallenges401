@@ -115,10 +115,7 @@ def ICMPSweep():
 
         if resp is None:
             print (str(host) + " is down/unresponsive.")
-        elif(
-            int(resp.getlayer(ICMP).type) == 3 and 
-            int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
-         ):
+        elif(int(resp.getlayer(ICMP).type) == 3 and int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]):
             print(str(host)  + " is blocking ICMP traffic")
         else:
             print(str(host)  + " is respoinding.")
