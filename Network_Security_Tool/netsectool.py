@@ -98,8 +98,8 @@ def ICMPSweep():
     print(" ")
     
     
-    network=input("Input IP range to ping in format 0.0.0.0/0: ")
-    addresses=IPv4Network(network)
+    netIP=input("Input IP range to ping in format 0.0.0.0/0: ")
+    netAddresses=IPv4Network(netIP)
     liveCount=0
 
     print("*" * 50) 
@@ -108,8 +108,8 @@ def ICMPSweep():
     print("*" * 50)
     print (" ")
 
-    for host in addresses:
-        if (host in (addresses.network_address, addresses.broadcast_address)):
+    for host in netAddresses:
+        if (host in (netAddresses.network_address, netAddresses.broadcast_address)):
             continue
         resp= sr1(IP(dst=str(host))/ICMP(),timeout=2,verbose=0)
 
@@ -124,7 +124,7 @@ def ICMPSweep():
             print(str(host)  + " is respoinding.")
             liveCount += 1
         
-    print(liveCount/addresses.num_addresses + " hosts are online")
+    print(liveCount/netAddresses.num_addresses + " hosts are online")
 
     print (" ")
     print("*" * 50) 
