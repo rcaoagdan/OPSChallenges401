@@ -103,7 +103,7 @@ def ICMPSweep():
     liveCount=0
 
     print("*" * 50) 
-    print("Pinging:" + network )
+    print("Pinging:" + netIP )
     print("Ping Sweep started at: " + str(datetime.now()))
     print("*" * 50)
     print (" ")
@@ -128,7 +128,7 @@ def ICMPSweep():
 
     print (" ")
     print("*" * 50) 
-    print("Pinged:" + network )
+    print("Pinged:" + netIP )
     print("Ping Sweep ended at: " + str(datetime.now()))
     print("*" * 50)
     print (" ")
