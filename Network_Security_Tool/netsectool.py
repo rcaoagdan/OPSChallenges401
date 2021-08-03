@@ -148,10 +148,6 @@ main_menu()
 ##TCP##
 # https://gist.github.com/mic159/c7133509af81dad409b79b8c4838f4bd
 
-##ICPMP Ping Sweep##
-# https://thepacketgeek.com/scapy/building-network-tools/part-10/
-
-
 #### For your Reference ####
 
 ### TCP SCAN ###
