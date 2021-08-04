@@ -105,37 +105,34 @@ def ICMPSweep():
     print(" ")
     
     
-    network=input("Input IP range to ping in format 0.0.0.0/0: ")
-    addresses=IPv4Network(network)
+    netIP=input("Input IP range to ping in format 0.0.0.0/0: ")
+    netAddresses=IPv4Network(netIP)
     liveCount=0
 
     print("*" * 50) 
-    print("Pinging:" + network )
+    print("Pinging:" + netIP )
     print("Ping Sweep started at: " + str(datetime.now()))
     print("*" * 50)
     print (" ")
 
-    for host in addresses:
-        if (host in (addresses.network_address, addresses.broadcast_address)):
+    for host in netAddresses:
+        if (host in (netAddresses.network_address, netAddresses.broadcast_address)):
             continue
         resp= sr1(IP(dst=str(host))/ICMP(),timeout=2,verbose=0)
 
         if resp is None:
             print (str(host) + " is down/unresponsive.")
-        elif(
-            int(resp.getlayer(ICMP).type) == 3 and 
-            int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
-         ):
+        elif(int(resp.getlayer(ICMP).type) == 3 and int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]):
             print(str(host)  + " is blocking ICMP traffic")
         else:
             print(str(host)  + " is respoinding.")
             liveCount += 1
         
-    print(liveCount/addresses.num_addresses + " hosts are online")
+    print(liveCount/netAddresses.num_addresses + " hosts are online")
 
     print (" ")
     print("*" * 50) 
-    print("Pinged:" + network )
+    print("Pinged:" + netIP )
     print("Ping Sweep ended at: " + str(datetime.now()))
     print("*" * 50)
     print (" ")
@@ -186,9 +183,7 @@ def ipPort():
 # Main
 ##############################################################################
 main_menu()
-##############################################################################
-# End
-##############################################################################
+
 
 ##############################################################################
 # Source/ Refrence
@@ -199,11 +194,14 @@ main_menu()
 ##TCP##
 # https://gist.github.com/mic159/c7133509af81dad409b79b8c4838f4bd
 
+<<<<<<< HEAD
 ##ICPMP Ping Sweep##
 # https://thepacketgeek.com/scapy/building-network-tools/part-10/
 
 ## NMAP ##
 # 
+=======
+>>>>>>> 9bb1be9ee3406c86c1831dc4454b56ff217bc995
 #### For your Reference ####
 
 ### TCP SCAN ###
@@ -228,3 +226,7 @@ main_menu()
 # 9 - Communication with Destination Network is Administratvely Prohibited 
 # 10 - Communication with Destination Host is Administratively Prohibited
 # 13 - Communication with Administrativley Prohibited 
+
+##############################################################################
+# End
+##############################################################################
