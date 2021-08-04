@@ -163,8 +163,17 @@ def ipPort():
         print (" ")
         print ("Checking Ports")
         IPscan.scan(uIP, '1-100000')
-        for proto in IPscan[uIP].all_protocols():
-            print()
+        for host in IPscan.all_hosts():
+            print('Host : %s (%s)' % (host, IPscan[host].hostname()))
+            print('State : %s' % IPscan[host].state())
+            for proto in IPscan[host].all_protocols():
+                print('----------')
+                print('Protocol : %s' % proto)
+ 
+                lport = IPscan[host][proto].keys()
+                lport.sort()
+                for port in lport:
+                    print ('port : %s\tstate : %s' % (port, IPscan[host][proto][port]['state'])
 
 
 
