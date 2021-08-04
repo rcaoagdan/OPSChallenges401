@@ -34,14 +34,15 @@ target_IP = input("Please enter an IP to Ping: ")
 ping_IP=os.system("ping -w 2000 -c 1 " + target_IP)
 IPscan=nmap.PortScanner()
 
-print(" ")
-print("*" * 50) 
-print("Network is up")
-print("We Will Now Begin Scaning for Open Ports")
-print("*" * 50) 
-print(" ")
+
 
 if ping_IP == 0:
+    print(" ")
+    print("*" * 50) 
+    print("Network is up")
+    print("We Will Now Begin Scaning for Open Ports")
+    print("*" * 50) 
+    print(" ")
     bPort = int(input("Enter begining port: "))
     ePort = int(input("Enter ending port: "))
     print(" ")
