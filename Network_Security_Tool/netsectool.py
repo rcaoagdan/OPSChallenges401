@@ -42,7 +42,6 @@ print("*" * 50)
 print(" ")
 
 if ping_IP == 0:
-   
     bPort = int(input("Enter begining port: "))
     ePort = int(input("Enter ending port: "))
     print(" ")
