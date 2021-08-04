@@ -10,11 +10,15 @@
 ##############################################################################
 import random
 from re import VERBOSE
-import sys
+import nmap
+import os
+import socket
 from typing import List
 from ipaddress import IPv4Network
 from scapy.all import *
 from datetime import datetime
+
+from scapy.modules.six import u
 
 
 ##############################################################################
@@ -25,7 +29,8 @@ def main_menu():
     print("What Would You Like to Do?")
     print("1.TCP Port Scanner")
     print("2.ICMP Ping Sweep")
-    print("3.Exit")
+    print("3.IP/Port")
+    print("4.Exit")
     print("*" * 50)
     mainInput= input("OPTION: " ) 
     print("*" * 50 + "\n")
@@ -34,6 +39,8 @@ def main_menu():
     elif mainInput ==  '2':
         ICMPSweep()
     elif mainInput == '3':
+        ipPort()
+    elif mainInput == '4':
         exit
     else:
         print("Incorrect Selection")
@@ -45,7 +52,7 @@ def main_menu():
 def tcpScan():
     print(" ")
     print("*" * 50) 
-    print("TCP Scan")
+    print("TCP Port Scanner \n")
     print("*" * 50) 
     print(" ")
 
@@ -93,7 +100,7 @@ def tcpScan():
 def ICMPSweep():
     print(" ")
     print("*" * 50) 
-    print("ICMP PINGSWEEP")
+    print("ICMP PING SWEEP")
     print("*" * 50) 
     print(" ")
     
@@ -133,6 +140,48 @@ def ICMPSweep():
     print("*" * 50)
     print (" ")
     main_menu()
+
+##############################################################################
+# IP Ping and check for open ports
+##############################################################################
+def ipPort():
+    print(" ")
+    print("*" * 50) 
+    print("IP ping and port Scanner \n")
+    print("*" * 50) 
+    print(" ")
+
+    uIP = input("Please enter an IP to Ping: ")
+    ping_ip = os.system("ping -c 1 " + uIP)
+    IPscan=nmap.PortScanner()
+
+    if ping_ip == 0:
+        print(" ")
+        print("*" * 50) 
+        print("Pinged:" + uIP)
+        print("Ping started at: " + str(datetime.now()))
+        print("Netork is active")
+        print ("Checking Ports....")
+        print("*" * 50)
+        print (" ")
+        print ("Checking Ports")
+        IPscan.scan(uIP, '1-100000')
+        for proto in IPscan[uIP].all_protocols():
+            print()
+
+
+
+    else:
+        print(" ")
+        print("*" * 50) 
+        print("Pinged:" + uIP)
+        print("Network is not Active")
+        print("Ping  ended at: " + str(datetime.now()))
+        print("*" * 50)
+        print (" ")
+
+    main_menu()
+
 ##############################################################################
 # Main
 ##############################################################################
@@ -153,7 +202,8 @@ main_menu()
 ##ICPMP Ping Sweep##
 # https://thepacketgeek.com/scapy/building-network-tools/part-10/
 
-
+## NMAP ##
+# 
 #### For your Reference ####
 
 ### TCP SCAN ###
