@@ -38,7 +38,7 @@ if ping_IP == 0:
     print(" ")
     print("*" * 50) 
     print("Network is up")
-    print("We Will Now Begin Scaning for Open Ports")
+    print("We Will Now Begin Scanning for Open Ports")
     print("*" * 50) 
     print(" ")
     bPort = int(input("Enter begining port: "))
