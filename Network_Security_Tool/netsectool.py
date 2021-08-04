@@ -2,8 +2,8 @@
 
 # Script: Network Security Tool
 # Author: Ray Caoagdan
-# Date of Last Revision: 08/02/2021
-# Purpose:  Scan Ports | ICMP Sweep
+# Date of Last Revision: 08/04/2021
+# Purpose:  Scan Ports | ICMP Sweep | Combined 
 
 ##############################################################################
 # Import Library 
@@ -31,24 +31,35 @@ print("*" * 50)
 print(" ")
 
 target_IP = input("Please enter an IP to Ping: ")
-ping_IP=os.system("ping -c 1 " + target_IP)
+ping_IP=os.system("ping -w 2000 -c 1 " + target_IP)
 IPscan=nmap.PortScanner()
 
-if ping_IP == 0:
-    print(" ")
-    print("*" * 50) 
-    print("Network is up")
-    print("Scanning Ports:")
-    print("*" * 50) 
-    print(" ")
-    bPorts = int(input("Enter begining port: "))
-    ePorts = int(input("Enter ending port: "))
-    for i in range(bPorts,ePorts+1):
+print(" ")
+print("*" * 50) 
+print("Network is up")
+print("We Will Now Begin Scaning for Open Ports")
+print("*" * 50) 
+print(" ")
 
+if ping_IP == 0:
+   
+    bPort = int(input("Enter begining port: "))
+    ePort = int(input("Enter ending port: "))
+    print(" ")
+    print("*" * 50) 
+    print("Scaning Ports " + str(bPort) + "-" + str(ePort))
+    print("*" * 50) 
+    print(" ")
+    for i in range(bPort,ePort+1):
         res = IPscan.scan(target_IP,str(i))
         res = res['scan'][target_IP]['tcp'][i]['state']# target results in dictionary
         print(f'port {i} is {res}')
-
+    print(" ")
+    print("*" * 50) 
+    print("Pinged:" + target_IP )
+    print("Ports Scan " + str(bPort) + "-" + str(ePort))
+    print("Ping and Scan Ended at: " + str(datetime.now()))
+    print("*" * 50 + "\n")  
 
 else:
     print(" ")
