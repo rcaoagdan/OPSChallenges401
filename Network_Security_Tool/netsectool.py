@@ -34,8 +34,6 @@ target_IP = input("Please enter an IP to Ping: ")
 ping_IP=os.system("ping -w 2000 -c 1 " + target_IP)
 IPscan=nmap.PortScanner()
 
-
-
 if ping_IP == 0:
     print(" ")
     print("*" * 50) 
