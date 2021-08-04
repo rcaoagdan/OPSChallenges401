@@ -44,7 +44,6 @@ if ping_IP == 0:
     bPorts = int(input("Enter begining port: "))
     ePorts = int(input("Enter ending port: "))
     for i in range(bPorts,ePorts+1):
-    #for i in range(begin,end+1):
 
         res = IPscan.scan(target_IP,str(i))
         res = res['scan'][target_IP]['tcp'][i]['state']# target results in dictionary
