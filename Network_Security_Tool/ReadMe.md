@@ -24,12 +24,14 @@ In Python, create a TCP Port Range Scanner that tests whether a TCP port is open
         * If ICMP type is 3 and ICMP code is either 1, 2, 3, 9, 10, or 13 then inform the user that the host is actively blocking ICMP traffic.
         * Otherwise, inform the user that the host is responding.
     * Count how many hosts are online and inform the user.
-
-### Part 3:
-* Ping an IP address determined by the user.
-* If the host exists, scan its ports and determine if any are open.
-
 ## Stretch Goals
 * Utilize the random library
 * Randomize the TCP source port in hopes of obfusticating the source of the scan
 * Instead of targeting a single IP address, allow the user to specify a range of IPs and have the tool scan each one in succession.
+
+### ***NMAPTOOL***
+Utilizing nmap to: 
+* Ping an IP address determined by the user.
+* If the host exists, scan its ports and determine if any are open.
+
+
