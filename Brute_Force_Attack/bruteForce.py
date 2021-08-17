@@ -17,11 +17,6 @@ import itertools
 ##############################################################################
 def runIterator(): 
     filePath = input("Enter Dictionary File Path: \n" )
-    # wordFile = open(filePath, "r")
-    # wordLine=wordFile.readline()
-    # for word in wordLine:
-    #     print (word)
-    #     time.sleep(1)
     with open(filePath) as wordList:
         for line in wordList:
             time.sleep(1)
