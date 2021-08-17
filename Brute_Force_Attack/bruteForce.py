@@ -21,8 +21,7 @@ def runIterator():
         for line in wordList:
             time.sleep(1)
             stripLine=line.strip()
-            print (stripLine)
-            
+            print (stripLine)       
     wordList.close()
     print(" ")
 
