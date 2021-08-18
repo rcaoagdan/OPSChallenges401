@@ -37,17 +37,19 @@ def runCheckPass():
     wordList.close()
     print(" ")
 
-def sshConnect(ssh_host,ssh_user,ssh_pwd, connectStat = 0):
+def sshConnect(ssh_host,ssh_user,ssh_pwd):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    connectStat = 0
 
     try:
         ssh.connect(ssh_host, username=ssh_user, password=ssh_pwd, connectStat=0)
 
     except paramiko.AuthenticationException:
         connectStat = 1 # Failed Authentication
+    except socket.error as e:
+        connectStat = 2 # Connection Failed
     ssh.close()
-
     return connectStat
 
 def bruteForce():
