@@ -51,7 +51,7 @@ Assume the username and IP are known inputs and attempt each word on the provide
 
 __Note: Stay out of trouble! Restrict this kind of traffic to your local network VMs.__
 
-### Part 2
+### Part 3:
 First, setup your target ZIP file.
 * Create a .txt file containing a secret message.
 * Follow the guide, How to Protect Zip file with Password, to archive the .txt file with password protection.
