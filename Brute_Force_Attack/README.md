@@ -10,6 +10,8 @@ Today you will begin to develop a custom tool that performs brute force attacks 
 __Note: The RockYou passwords come bundled with Kali Linux, but you can also download them separately at the above link.__
 
 ## Requirements
+
+### Part 1:
 In Python, create a script that:
 
 * **Mode 1: Offensive; Dictionary Iterator**
@@ -40,3 +42,11 @@ Most of us have probably battled a password complexity requirement at some point
     * Were at least [qty] symbols used?
 * Prints to the screen which of the above dimensions were satisfied by the user input password.
     * If all dimensions are satisfied, print a clear SUCCESS indicator for the user.
+
+### Part 2
+Add to your Python brute force tool the capability to:
+
+Authenticate to an SSH server by its IP address.
+Assume the username and IP are known inputs and attempt each word on the provided word list until successful login takes place.
+
+__Note: Stay out of trouble! Restrict this kind of traffic to your local network VMs.__
