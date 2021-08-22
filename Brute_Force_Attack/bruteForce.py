@@ -71,10 +71,10 @@ def bruteForce():
                 print("Connection could not be establish to: " + str(ssh_host))
             else:
                 print ("UNKOWN ERROR")
-        
-        
-  
     print(" ")
+
+def fileForce():
+    print("WIP")
 
 ##############################################################################
 # Main
@@ -84,8 +84,9 @@ if __name__ == '__main__':
         print("Brute Force Attack Menu \n")
         print("1: Offensive- Dictionary Iterator")
         print("2: Defensive- Password Recognized")
-        print("3: Brute Force")
-        print("4: Exit")
+        print("3: Brute Force-SSH")
+        print("4: Brute Force-File Lock")
+        print("5: Exit")
         mode=input("Please make a selection: ")
 
         if(mode == "1"):
@@ -95,6 +96,8 @@ if __name__ == '__main__':
         elif(mode == "3"):
             bruteForce()
         elif(mode == "4"):
+            fileForce()
+        elif(mode == "5"):
             break
         else:
             print("INVALID SELECTION \n")
