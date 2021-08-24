@@ -8,10 +8,10 @@
 # Import Library
 ##############################################################################
 import time
-import itertools
 import socket
 import  paramiko 
-
+import zipfile
+from tqdm import tqdm 
 ##############################################################################
 # Declare Functions
 ##############################################################################
@@ -73,7 +73,29 @@ def bruteForce():
     print(" ")
 
 def fileForce():
-    print("WIP")
+    file= input("What is the ZipFile:")
+    filePath= input("Enter Dictionary File Path: ")
+    zip_File= zipfile.ZipFile(file) #intialize zip file object
+    print("  ")
+
+    with open(filePath) as wordList:
+        for passWrd in tqdm(wordList):
+            try:
+                zip_File.extractall(pwd=passWrd.strip())
+            except:
+                continue
+            else:
+                print("PASSWORD FOUND: " + str(passWrd))
+                break
+    print ("NO PASSWORD FOUND")
+            
+
+    #print("PASSWORD NOT FOUND! ")
+    
+    
+
+    wordList.close()
+    print(" ")
 
 ##############################################################################
 # Main
