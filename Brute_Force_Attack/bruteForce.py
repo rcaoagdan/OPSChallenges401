@@ -11,7 +11,7 @@ import time
 import socket
 import  paramiko 
 import zipfile
-from tqdm import tqdm 
+
 ##############################################################################
 # Declare Functions
 ##############################################################################
@@ -56,7 +56,7 @@ def bruteForce():
     ssh_user = input("Enter username: ")
     filePath = input("Enter Dictionary File Path: \n")
 
-    with open(filePath) as wordList:
+    with open(filePath, encoding="ISO-8859-1") as wordList:
         for passWrd in wordList:
             ssh_pwd = passWrd.strip()
             connection = sshConnect(ssh_host,ssh_user,ssh_pwd)
@@ -79,21 +79,17 @@ def fileForce():
     print("  ")
 
     with open(filePath) as wordList:
-        for passWrd in tqdm(wordList):
+        for passWrd in wordList:
+            zipPass=passWrd.strip()
             try:
-                zip_File.extractall(pwd=passWrd.strip())
+                zip_File.extractall(pwd=str.encode(zipPass))
             except:
-                continue
+                print("PASSWORD NOT FOUND!")
             else:
                 print("PASSWORD FOUND: " + str(passWrd))
                 break
-    print ("NO PASSWORD FOUND")
-            
-
-    #print("PASSWORD NOT FOUND! ")
     
     
-
     wordList.close()
     print(" ")
 
