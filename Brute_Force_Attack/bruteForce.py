@@ -2,7 +2,7 @@
 
 # Script: Brute Force Tool
 # Author: Ray Caoagdan
-# Date of Last Revision: 08/18/2021
+# Date of Last Revision: 09/13/21
 
 ##############################################################################
 # Import Library
