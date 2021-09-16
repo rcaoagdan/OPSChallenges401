@@ -2,7 +2,7 @@
 
 # Script: Network Security Tool-NMAP
 # Author: Ray Caoagdan
-# Date of Last Revision: 08/05/2021
+# Date of Last Revision: 09/15/2021
 
 ##############################################################################
 # Import Library
@@ -11,11 +11,16 @@ import os
 import nmap
 from datetime import datetime
 import logging
+import logging.handlers as handlers 
 
 ##############################################################################
 # logging
 ##############################################################################
-logger = logging.basicConfig(filename='nmaplogs.log', level=logging.DEBUG)
+# logger = logging.basicConfig(filename='nmaplogs.log', level=logging.DEBUG)
+logger = handlers.TimedRotatingFileHandler(filename='nmaplogs.log', when="M", interval=1)
+logger.setLevel(logging.DEBUG)
+
+
 ##############################################################################
 # Ping and Port Scanner with Nmap
 ##############################################################################
