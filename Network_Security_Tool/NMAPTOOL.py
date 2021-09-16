@@ -10,9 +10,12 @@
 import os
 import nmap
 from datetime import datetime
+import logging
 
-
-
+##############################################################################
+# logging
+##############################################################################
+logger = logging.basicConfig(filename='nmaplogs.log', level=logging.DEBUG)
 ##############################################################################
 # Ping and Port Scanner with Nmap
 ##############################################################################
@@ -25,12 +28,15 @@ def nmapTool():
 
     target_IP = input("Please enter an IP to Ping: ")
     ping_IP=os.system("ping -w 2000 -c 1 " + target_IP)
+    logging.info("Pining: " + str(target_IP))
     IPscan=nmap.PortScanner()
-
+    
     if ping_IP == 0:
         print(" ")
         print("*" * 50) 
         print("Network is up")
+        logging.info("Network is up")
+        logging.info("Now checking for open ports")
         print("We Will Now Begin Scanning for Open Ports")
         print("*" * 50) 
         print(" ")
@@ -45,6 +51,7 @@ def nmapTool():
             res = IPscan.scan(target_IP,str(port))
             res = res['scan'][target_IP]['tcp'][port]['state']# target results in dictionary
             print(f'port {port} is {res}')
+            logging.info('Results of port scan is: ' +str(port)+ " " +str(res))
         print(" ")
         print("*" * 50) 
         print("Pinged:" + target_IP )
@@ -56,6 +63,7 @@ def nmapTool():
         print(" ")
         print("*" * 50) 
         print("Pinged:" + target_IP )
+        logging.error('Error, Network not active or invalid IP Address')
         print("Network is not Active")
         print("Ping Ended at: " + str(datetime.now()))
         print("*" * 50 + "\n")  
