@@ -2,12 +2,12 @@
 
 # Script: Network Security Tool-NMAP
 # Author: Ray Caoagdan
-# Date of Last Revision: 09/15/2021
+# Date of Last Revision: 09/20/2021
 
 ##############################################################################
 # Import Library
 ##############################################################################
-import os
+import os,sys
 import nmap
 from datetime import datetime
 import logging
@@ -16,13 +16,28 @@ import logging.handlers as handlers
 ##############################################################################
 # logging
 ##############################################################################
-# logger = logging.basicConfig(filename='nmaplogs.log', level=logging.DEBUG)
-logger = handlers.TimedRotatingFileHandler(filename='nmaplogs.log', when="M", interval=1)
+# #logger = logging.basicConfig(filename='nmaplogs.log', level=logging.DEBUG)
+# logger = handlers.TimedRotatingFileHandler(filename='nmaplogs.log', when="m", interval=1, backupCount=3)
+#main custom logger 
+logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
+# file handler
+flogger = logging.FileHandler('nmaplogs.log')
+# flogger.setLevel(logging.DEBUG)
+format_logger=logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s ')
+flogger.setFormatter(format_logger)
+logger.addHandler(flogger)
+
+#stream handler
+slog = logging.StreamHandler(sys.stdout)
+# slog.setLevel(logging.WARNING)
+sformat_logger=logging.Formatter('%(name)s - %(levelname)s - %(message)s ')
+slog.setFormatter(sformat_logger)
+logger.addHandler(slog)
 
 ##############################################################################
-# Ping and Port Scanner with Nmap
+# Ping and Port Scanner with Nmapn
 ##############################################################################
 def nmapTool():
     print(" ")
@@ -33,7 +48,7 @@ def nmapTool():
 
     target_IP = input("Please enter an IP to Ping: ")
     ping_IP=os.system("ping -w 2000 -c 1 " + target_IP)
-    logging.info("Pining: " + str(target_IP))
+    logging.info("Pinging: " + str(target_IP))
     IPscan=nmap.PortScanner()
     
     if ping_IP == 0:
@@ -55,7 +70,7 @@ def nmapTool():
         for port in range(bPort,ePort+1):
             res = IPscan.scan(target_IP,str(port))
             res = res['scan'][target_IP]['tcp'][port]['state']# target results in dictionary
-            print(f'port {port} is {res}')
+            # print(f'port {port} is {res}')
             logging.info('Results of port scan is: ' +str(port)+ " " +str(res))
         print(" ")
         print("*" * 50) 
