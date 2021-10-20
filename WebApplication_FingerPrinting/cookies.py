@@ -4,6 +4,7 @@
 
 import requests
 import webbrowser
+
 #targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
 response = requests.get(targetsite)
@@ -45,9 +46,9 @@ with open(html_file, 'wb') as f:
   f.write(file.content)
 openClose = input ("Shall we open the file Y/N?")
 if (openClose == "Y" or "y"):
-  # - Open it with Firefox
-  webbrowser.open(html_file, new=1y
-)
+  # - Open it with browser of your choosing
+  webbrowser.open_new_tab(html_file)
+
 elif(openClose == "N" or "n"):
   print("COOKIE MONSTER SAYS BYE BYE!")
   exit
