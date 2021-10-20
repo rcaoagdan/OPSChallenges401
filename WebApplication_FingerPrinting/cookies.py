@@ -4,7 +4,7 @@
 
 import requests
 
-# targetsite = input("Enter target site:") # Uncomment this to accept user input target site
+#targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
 response = requests.get(targetsite)
 cookie = response.cookies
@@ -24,15 +24,21 @@ def bringforthcookiemonster(): # Because why not!
       `. "    '"--...--"'  . ' .'  .'  o   `.
 
         ''')
-
 bringforthcookiemonster()
 print("Target site is " + targetsite)
+print(" ")
 print(cookie)
-
-# Add here some code to make this script perform the following:
+print(" ")
 # - Send the cookie back to the site and receive a HTTP response
+print("*" * 75)
+response2 = requests.get(targetsite, cookies=cookie)
+print("Returning the cookie back to " + targetsite + "\n")
+print("The HTTP RESONSE IS....")
+print(response2)
+print(" ")
 # - Generate a .html file to capture the contents of the HTTP response
 # - Open it with Firefox
-#
+
+
 # Stretch Goal
-# - Give Cookie Monster hands
+# - Give Cookie Monster handss
