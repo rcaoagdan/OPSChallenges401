@@ -3,7 +3,7 @@
 # The below Python script shows one possible method to return the cookie from a site that supports cookies.
 
 import requests
-
+import webbrowser
 #targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
 response = requests.get(targetsite)
@@ -33,11 +33,28 @@ print(" ")
 print("*" * 75)
 response2 = requests.get(targetsite, cookies=cookie)
 print("Returning the cookie back to " + targetsite + "\n")
-print("The HTTP RESONSE IS....")
+print("The HTTP RESPONSE IS....")
 print(response2)
 print(" ")
 # - Generate a .html file to capture the contents of the HTTP response
-# - Open it with Firefox
+print("*" * 75)
+print("Saving reponse.......")
+html_file = 'httpFile.hmtl'
+file = requests.get(targetsite)
+with open(html_file, 'wb') as f:
+  f.write(file.content)
+openClose = input ("Shall we open the file Y/N?")
+if (openClose == "Y" or "y"):
+  # - Open it with Firefox
+  webbrowser.open(html_file, new=1y
+)
+elif(openClose == "N" or "n"):
+  print("COOKIE MONSTER SAYS BYE BYE!")
+  exit
+else:
+  print("COOKIE MONSTER SAD YOU DIDN'T ENTER A CORRECT INPUT")
+  exit
+
 
 
 # Stretch Goal
