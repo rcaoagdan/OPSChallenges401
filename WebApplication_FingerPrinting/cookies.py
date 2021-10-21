@@ -45,7 +45,7 @@ print(" ")
 print("*" * 75)
 print("Saving reponse.......")
 html_file = 'httpFile.html'
-file = requests.get(targetsite)
+file = requests.get(targetsite,cookies=cookie)
 with open(html_file, 'wb') as f:
   f.write(file.content)
 openClose = input ("Shall we open the file Y/N?")
