@@ -4,7 +4,7 @@
 
 import requests
 import webbrowser
-import os
+
 
 #targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
@@ -53,6 +53,7 @@ if (openClose == "Y" or "y"):
 
   # - Open it with  default browser 
   webbrowser.open_new_tab(html_file) 
+ 
 
 elif(openClose == "N" or "n"):
   print("COOKIE MONSTER SAYS BYE BYE!")  
@@ -64,4 +65,4 @@ else:
 
 
 # Stretch Goal
-# - Give Cookie Monster handss
+# - Give Cookie Monster hands
